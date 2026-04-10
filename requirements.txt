@@ -1,0 +1,10 @@
+django 
+djangorestframework 
+djangorestframework-simplejwt 
+environs
+bcrypt
+pillow
+psycopg2-binary
+django-filter
+xhtml2pdf
+django-cors-headers
