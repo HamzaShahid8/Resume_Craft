@@ -11,10 +11,24 @@ class EducationSerializer(serializers.ModelSerializer):
         model = Education
         fields = ['id', 'institute', 'degree', 'start_year', 'end_year']
         
+    def to_internal_value(self, data):
+        int_fields = ['start_year', 'end_year']
+        for field in int_fields:
+            if data.get(field) == '':
+                data[field] = None
+        return super().to_internal_value(data)
+        
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = ['id', 'company', 'role', 'start_date', 'end_date', 'description']
+        
+    def to_internal_value(self, data):
+        date_fields = ['start_date', 'end_date']
+        for field in date_fields:
+            if data.get(field) == '':
+                data[field] = None
+        return super().to_internal(data)
         
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,10 +39,7 @@ class ResumeSerializer(serializers.ModelSerializer):
     personal = PersonalInfoSerializer()
     education = EducationSerializer(many=True, required=False)
     experience = ExperienceSerializer(many=True, required=False)
-    skills = serializers.ListField(
-        child=serializers.CharField(),
-        required=False
-    )
+    skills = SkillSerializer(many=True, required=False)
     
     class Meta:
         model = Resume
@@ -36,23 +47,64 @@ class ResumeSerializer(serializers.ModelSerializer):
         
         
     def create(self, validated_data):
-        skills_data = validated_data.pop('skills', [])
-        resume = Resume.objects.create(**validated_data)
+        personal_data = validated_data.pop("personal", None)
+        education_data = validated_data.pop("education", [])
+        experience_data = validated_data.pop("experience", [])
+        skills_data = validated_data.pop("skills", [])
+
+        resume = Resume.objects.create(user = self.context['request'].user, **validated_data)
+
+        PersonalInfo.objects.create(resume=resume, **personal_data)
         
-        # Create skill objects
-        for skill_name in skills_data:
-            Skill.objects.create(resume=resume, name=skill_name)
+        education = Education.objects.bulk_create([
+            Resume(resume=resume, **edu)
+            for edu in education_data
+        ])
+        
+        experience = Experience.objects.bulk_create([
+            Experience(resume=resume, **exp)
+            for exp in experience_data
+        ])
+        
+        skills = Skill.objects.bulk_create([
+            Skill(resume=resume, **skill)
+            for skill in skills_data
+        ])
         
         return resume
-
+    
+    
     def update(self, instance, validated_data):
-        skills_data = validated_data.pop('skills', [])
+        personal_data = validated_data.pop('personal')
+        education_data = validated_data.pop('education')
+        experience_data = validated_data.pop('experience')
+        skills_data = validated_data.pop('skills_data')
+        
         instance.title = validated_data.get('title', instance.title)
+        instance.summary = validated_data.get('summary', instance.summary)
         instance.save()
-
-        # Update skills: delete old, add new
+        
+        PersonalInfo.objects.update_or_create(
+            resume=instance,
+            defaults=personal_data
+        )
+        
+        instance.education.all().delete()
         instance.skills.all().delete()
-        for skill_name in skills_data:
-            Skill.objects.create(resume=instance, name=skill_name)
-
+        instance.experience.all().delete()
+        
+        Education.objects.bulk_create([
+            Education(resume=instance, **edu) for edu in education_data
+        ])
+        
+        Experience.objects.bulk_create([
+            Experience(resume=instance, **exp)
+            for exp in experience_data
+        ])
+        
+        Skill.objects.bulk_create([
+            Skill(resume=instance, **skill)
+            for skill in skills_data
+        ])
+        
         return instance

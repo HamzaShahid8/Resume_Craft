@@ -3,7 +3,7 @@ import axios from "axios";
 
 // 1️⃣ Create axios instance
 const privateRequest = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/",
+  baseURL:  "http://localhost:8000/",
   headers: {
     "Content-Type": "application/json",
   },

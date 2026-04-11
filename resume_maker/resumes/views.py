@@ -50,6 +50,15 @@ class ResumeViewSet(viewsets.ModelViewSet):
         
         return Resume.objects.filter(user=user)
     
+    def get_permissions(self):
+        
+        user = self.request.user
+        
+        if self.action in ['create', 'update', 'partial_update', 'retrieve', 'destroy']:
+            return [IsAuthenticated()]
+        
+        return [IsAuthenticated()]
+    
         
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -490,42 +499,52 @@ class SkillViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
 
-        # Bulk create
+    # Bulk create
         if isinstance(data, list):
             created_items = []
             for item in data:
+
+                if isinstance(item, str):
+                    item = {"name": item}
+
                 resume_id = item.pop('resume_id', None)
                 if not resume_id:
-                    return Response({'error': 'resume_id is required for each skill'},
-                                    status=status.HTTP_400_BAD_REQUEST)
+                    return Response(
+                        {'error': 'resume_id is required'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
                 try:
                     resume = Resume.objects.get(id=resume_id, user=request.user)
                 except Resume.DoesNotExist:
-                    return Response({'error': f'Invalid resume_id {resume_id}'},
-                                    status=status.HTTP_400_BAD_REQUEST)
+                    return Response(
+                        {'error': f'Invalid resume_id {resume_id}'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
 
                 serializer = self.get_serializer(data=item)
                 serializer.is_valid(raise_exception=True)
-                serializer.save(resume=resume)  # <-- assign resume
+                serializer.save(resume=resume)
+
                 created_items.append(serializer.data)
 
             return Response(created_items, status=status.HTTP_201_CREATED)
 
-        # Single create
+    # Single create
+        if isinstance(data, str):
+            data = {"name": data}
+
         resume_id = data.pop('resume_id', None)
         if not resume_id:
             return Response({'error': 'resume_id is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            resume = Resume.objects.get(id=resume_id, user=request.user)
-        except Resume.DoesNotExist:
-            return Response({'error': 'Invalid resume_id'}, status=status.HTTP_400_BAD_REQUEST)
+        resume = Resume.objects.get(id=resume_id, user=request.user)
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save(resume=resume)
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
     # UPDATE
     def update(self, request, *args, **kwargs):
 

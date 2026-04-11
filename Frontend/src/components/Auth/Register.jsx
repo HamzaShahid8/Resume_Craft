@@ -22,7 +22,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await axiosInstance.post("accounts/register/", formData);
+      await axiosInstance.post("api/accounts/register/", formData);
       alert("Registered successfully!");
       navigate("/login");
     } catch (err) {

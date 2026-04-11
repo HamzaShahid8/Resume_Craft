@@ -48,9 +48,9 @@ export default function Login() {
 
         {/* Right side: form */}
         <div className="md:w-1/2 p-8 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          <p className="text-3xl font-bold text-gray-800 mb-6 text-center">
             Welcome Back!
-          </h2>
+          </p>
           <p className="text-center text-gray-600 mb-6">
             Login with your username to manage resumes and create professional CVs
           </p>
