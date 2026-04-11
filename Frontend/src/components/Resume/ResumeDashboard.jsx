@@ -83,6 +83,13 @@ export default function ResumeDashboard() {
             )}
           </div>
         </div>
+        <div className="mb-6">
+          <img
+            src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1400&q=80"
+            alt="Resume Builder"
+            className="w-full h-48 object-cover rounded-xl shadow"
+          />
+        </div>
 
         {/* ERROR */}
         {error && <p className="text-red-500 mb-4">{error}</p>}

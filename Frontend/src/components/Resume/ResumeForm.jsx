@@ -359,31 +359,31 @@ function ResumePDF({ data }) {
   return (
     <Document>
       <Page style={{ padding: 20 }}>
-        <Text style={{ fontSize: 16, color: "#000000" }} >{data.title}</Text>
+        <Text style={{ fontSize: 26, color: "black", fontWeight: "bold"}} >{data.title}</Text>
         <Text>{data.summary}</Text>
 
-        <Text style={{ color: "#000000" }}>Phone: {data.personal.phone}</Text>
-        <Text style={{ color: "#000000" }}>Address: {data.personal.address}</Text>
-        <Text style={{ color: "#000000" }}>LinkedIn: {data.personal.linkedin}</Text>
-        <Text style={{ color: "#000000" }}>GitHub: {data.personal.github}</Text>
+        <Text style={{ marginBottom: 10, fontWeight: "bold" }}>Phone: {data.personal.phone}</Text>
+        <Text style={{ marginBottom: 10, fontWeight: "bold" }}>Address: {data.personal.address}</Text>
+        <Text style={{ marginBottom: 10, fontWeight: "bold" }}>LinkedIn: {data.personal.linkedin}</Text>
+        <Text style={{ marginBottom: 20, fontWeight: "bold" }}>GitHub: {data.personal.github}</Text>
 
-        <Text>Education:</Text>
+        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Education:</Text>
         {data.education.map((e, i) => (
-          <Text key={i}>
+          <Text style={{ marginBottom: 10 }} key={i}>
             {e.institute} - {e.degree}
           </Text>
         ))}
 
-        <Text>Experience:</Text>
+        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Experience:</Text>
         {data.experience.map((e, i) => (
-          <Text key={i}>
+          <Text style={{ marginBottom: 10 }} key={i}>
             {e.company} - {e.role}
           </Text>
         ))}
 
-        <Text>Skills:</Text>
+        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Skills:</Text>
         {data.skills.map((s, i) => (
-          <Text key={i}>{s.name}</Text>
+          <Text style={{ marginBottom: 10 }} key={i}>{s.name}</Text>
         ))}
       </Page>
     </Document>
