@@ -362,10 +362,10 @@ function ResumePDF({ data }) {
         <Text style={{ fontSize: 26, color: "black", fontWeight: "bold"}} >{data.title}</Text>
         <Text>{data.summary}</Text>
 
-        <Text style={{ marginBottom: 10, fontWeight: "bold" }}>Phone: {data.personal.phone}</Text>
-        <Text style={{ marginBottom: 10, fontWeight: "bold" }}>Address: {data.personal.address}</Text>
-        <Text style={{ marginBottom: 10, fontWeight: "bold" }}>LinkedIn: {data.personal.linkedin}</Text>
-        <Text style={{ marginBottom: 20, fontWeight: "bold" }}>GitHub: {data.personal.github}</Text>
+        <Text style={{ marginBottom: 10 }}>Phone: {data.personal.phone}</Text>
+        <Text style={{ marginBottom: 10 }}>Address: {data.personal.address}</Text>
+        <Text style={{ marginBottom: 10 }}>LinkedIn: {data.personal.linkedin}</Text>
+        <Text style={{ marginBottom: 20 }}>GitHub: {data.personal.github}</Text>
 
         <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Education:</Text>
         {data.education.map((e, i) => (
