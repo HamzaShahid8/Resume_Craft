@@ -159,7 +159,7 @@ export default function ResumeForm() {
           value={formData.title}
           onChange={handleChange}
           placeholder="Title"
-          className="w-full p-3 bg-gray-100 rounded"
+          className="w-full p-3 bg-gray-100 rounded mb-2"
         />
 
         <textarea
@@ -167,7 +167,7 @@ export default function ResumeForm() {
           value={formData.summary}
           onChange={handleChange}
           placeholder="Summary"
-          className="w-full p-3 bg-gray-100 rounded"
+          className="w-full p-3 bg-gray-100 rounded mb-2"
         />
 
         {/* PERSONAL */}
