@@ -83,6 +83,34 @@ export default function ResumeDashboard() {
             )}
           </div>
         </div>
+        <div className="mb-6">
+          <img
+            src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1400&q=80"
+            alt="Resume Builder"
+            className="w-full h-48 object-cover rounded-xl shadow"
+          />
+          {/* WhatsApp CTA Section */}
+          <div className="mb-6 bg-gray-100 p-4 flex items-center justify-between">
+            <div>
+              <p className="text-gray-700 font-bold text-lg">
+                Need a Professional Resume / Website?
+              </p>
+              <p className="text-gray-600 text-sm">
+                Contact us on WhatsApp for custom Resume Builder, ATS Resume, or
+                Portfolio website.
+              </p>
+            </div>
+
+            <a
+              href="https://wa.me/923098500908?text=Hi%20I%20want%20a%20professional%20Resume%20Builder%20or%20Website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-semibold"
+            >
+              💬 WhatsApp Us
+            </a>
+          </div>
+        </div>
 
         {/* ERROR */}
         {error && <p className="text-red-500 mb-4">{error}</p>}
