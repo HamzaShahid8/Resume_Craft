@@ -25,11 +25,7 @@ SECRET_KEY = 'django-insecure-*q66u94ami6t+g4*rnv&pldd$ko85w4_9j5u%51odp3m8y=s1j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    ".onrender.com",   # allow all render subdomains
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -143,26 +139,16 @@ WSGI_APPLICATION = 'resume_maker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-import os
-import dj_database_url
-
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-    )
-}
-
-# fallback for local (optional but recommended)
-if not os.environ.get("DATABASE_URL"):
-    DATABASES["default"] = {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "myproject_db",
-        "USER": "myproject_user",
-        "PASSWORD": "postgres123",
-        "HOST": "localhost",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'myproject_db',         # your database name
+        'USER': 'myproject_user',       # your database user
+        'PASSWORD': 'postgres123',       # your password
+        'HOST': 'localhost',            # since it's local
+        'PORT': '5432',                 # default PostgreSQL port
     }
+}
 
 
 # Password validation
