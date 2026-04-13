@@ -100,7 +100,6 @@ export default function ResumeDashboard() {
                 Portfolio website.
               </p>
             </div>
-
             <a
               href="https://wa.me/923098500908?text=Hi%20I%20want%20a%20professional%20Resume%20Builder%20or%20Website"
               target="_blank"
