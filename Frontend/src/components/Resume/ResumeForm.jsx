@@ -372,7 +372,6 @@ function ResumePDF({ data }) {
   return (
     <Document>
       <Page style={{ padding: 20 }}>
-<<<<<<< HEAD
         <Text style={{ fontSize: 20, color: "black", fontWeight: "bold", marginBottom: 10 }} >{data.title}</Text>
         <Text style={{ marginBottom: 10 }}>{data.summary}</Text>
 
@@ -380,39 +379,6 @@ function ResumePDF({ data }) {
         <Text style={{ marginBottom: 7 }}>Address: {data.personal.address}</Text>
         <Text style={{ marginBottom: 7 }}>LinkedIn: {data.personal.linkedin}</Text>
         <Text style={{ marginBottom: 10 }}>GitHub: {data.personal.github}</Text>
-=======
-        <Text style={{ fontSize: 26, color: "black", fontWeight: "bold" }}>
-          {data.title}
-        </Text>
-        <View
-          style={{
-            borderBottomWidth: 1,
-            borderBottomColor: "#999",
-            marginVertical: 10,
-          }}
-        />
-        <Text>{data.summary}</Text>
-        <View
-          style={{
-            borderBottomWidth: 1,
-            borderBottomColor: "#999",
-            marginVertical: 10,
-          }}
-        />
-
-        <Text style={{ marginBottom: 10 }}>Phone: {data.personal.phone}</Text>
-        <Text style={{ marginBottom: 10 }}>
-          Address: {data.personal.address}
-        </Text>
-        <Text style={{ marginBottom: 10 }}>
-          <Text
-            style={{ color: "blue", textDecoration: "underline" }}
-            src={data.personal.linkedin}
-          >
-            LinkedIn
-          </Text>
-        </Text>
->>>>>>> c7b1ed7 (update ui)
 
         <Text style={{ marginBottom: 20 }}>
           <Text
