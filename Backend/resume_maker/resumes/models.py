@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import *
+from Backend.resume_maker.accounts.models import *
 
 # Create your models here.
 
