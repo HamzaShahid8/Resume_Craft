@@ -119,17 +119,20 @@ export default function ResumeDashboard() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {resumes.map((r) => (
               <div key={r.id} className="bg-white p-4 rounded shadow">
-                <h2 className="text-xl font-bold">{r.title}</h2>
+                <h2 className="text-xl font-bold text-gray-900">{r.title}</h2>
+                <hr className="border-gray-300 my-2" />
 
                 <p className="text-gray-600 mb-2">{r.summary}</p>
+                <hr className="border-gray-300 my-2" />
 
                 {/* PERSONAL */}
                 {r.personal && (
                   <div className="text-sm text-gray-500 mb-2">
-                    <p>📞 {r.personal.phone}</p>
-                    <p>📍 {r.personal.address}</p>
+                    <p>{r.personal.phone}</p>
+                    <p>{r.personal.address}</p>
                   </div>
                 )}
+                <hr className="border-gray-300 my-2" />
 
                 {/* EDUCATION */}
                 {r.education?.length > 0 && (
@@ -142,6 +145,7 @@ export default function ResumeDashboard() {
                     ))}
                   </div>
                 )}
+                <hr className="border-gray-300 my-2" />
 
                 {/* EXPERIENCE */}
                 {r.experience?.length > 0 && (
@@ -154,6 +158,7 @@ export default function ResumeDashboard() {
                     ))}
                   </div>
                 )}
+                <hr className="border-gray-300 my-2" />
 
                 {/* SKILLS */}
                 {r.skills?.length > 0 && (
@@ -168,9 +173,10 @@ export default function ResumeDashboard() {
                     ))}
                   </div>
                 )}
+                <hr className="border-gray-300 my-2" />
 
                 {/* ACTION */}
-                <Link to={`/resume/${r.id}`} className="text-blue-500 text-sm">
+                <Link to={`/resume/${r.id}`} className="text-white bg-blue-950 text-sm rounded p-1">
                   Edit Resume
                 </Link>
               </div>
