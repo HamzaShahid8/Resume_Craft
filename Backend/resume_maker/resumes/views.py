@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from Backend.resume_maker.accounts.models import *
+from accounts.models import User
 from rest_framework import viewsets, status
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
