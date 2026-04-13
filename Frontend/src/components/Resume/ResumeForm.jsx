@@ -417,7 +417,7 @@ function ResumePDF({ data }) {
             color: "blue",
             textDecoration: "underline",
             marginBottom: 10,
-            fontSize: 5,
+            fontSize: 8,
           }}
         >
           {data.personal.linkedin}
@@ -431,7 +431,7 @@ function ResumePDF({ data }) {
             color: "blue",
             textDecoration: "underline",
             marginBottom: 10,
-            fontSize: 5,
+            fontSize: 8,
           }}
         >
           {data.personal.github}
