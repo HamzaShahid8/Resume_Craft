@@ -377,17 +377,17 @@ function ResumePDF({ data }) {
 
         <Text style={{ marginBottom: 7 }}>Phone: {data.personal.phone}</Text>
         <Text style={{ marginBottom: 7 }}>Address: {data.personal.address}</Text>
-        <Text style={{ marginBottom: 7 }}>LinkedIn: {data.personal.linkedin}</Text>
-        <Text style={{ marginBottom: 10 }}>GitHub: {data.personal.github}</Text>
+        <link style={{ marginBottom: 7 }}>LinkedIn: {data.personal.linkedin}</link>
+        <link style={{ marginBottom: 10 }}>GitHub: {data.personal.github}</link>
 
-        <Text style={{ marginBottom: 20 }}>
-          <Text
+        <link style={{ marginBottom: 20 }}>
+          <link
             style={{ color: "blue", textDecoration: "underline" }}
             src={data.personal.github}
           >
             GitHub
-          </Text>
-        </Text>
+          </link>
+        </link>
         <View
           style={{
             borderBottomWidth: 1,
