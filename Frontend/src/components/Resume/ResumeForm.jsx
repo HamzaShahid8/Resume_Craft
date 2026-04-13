@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import apiClient from "../../services/apiClient";
+import { Link } from "@react-pdf/renderer";
 
 import {
   PDFDownloadLink,
@@ -13,6 +14,7 @@ import {
 
 export default function ResumeForm() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const emptyEducation = {
     institute: "",
@@ -139,6 +141,7 @@ export default function ResumeForm() {
       }
 
       alert("Saved Successfully");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err.response?.data);
       alert("Error saving resume");
@@ -207,6 +210,7 @@ export default function ResumeForm() {
             className="p-2 bg-gray-100 rounded"
           />
         </div>
+
         <p className="text-gray-700 text-xl p-3 font-extrabold">Education</p>
         {/* EDUCATION */}
         <div className="bg-gray-100 text-gray-700 gap-1 rounded">
@@ -315,27 +319,26 @@ export default function ResumeForm() {
           <Btn onClick={() => addItem("skills")}>Add Skill</Btn>
         </Section>
 
-        {/* PDF DOWNLOAD (FIXED) */}
-        <div className="flex justify-end">
-          <PDFDownloadLink
-            document={<ResumePDF data={formData} />}
-            fileName="resume.pdf"
-          >
-            {({ loading }) => (
-              <button
-                type="button"
-                className="bg-gray-500 text-gray-100 px-4 py-2 rounded"
-              >
-                {loading ? "Generating..." : "Download PDF"}
-              </button>
-            )}
-          </PDFDownloadLink>
-        </div>
-
         {/* SUBMIT */}
         <button className="w-30 bg-gray-500 text-gray-100 p-3 rounded">
           Save Resume
         </button>
+        <div className="flex justify-end mt-4">
+          <PDFDownloadLink
+            document={<ResumePDF data={formData} />}
+            fileName="resume.pdf"
+          >
+            {({ loading, error }) => (
+              <span className="bg-gray-600 text-white px-4 py-2 rounded cursor-pointer inline-block">
+                {error
+                  ? "Error generating PDF"
+                  : loading
+                    ? "Generating PDF..."
+                    : "Download PDF"}
+              </span>
+            )}
+          </PDFDownloadLink>
+        </div>
       </form>
     </div>
   );
@@ -354,7 +357,6 @@ function Section({ title, children }) {
 function Card({ children }) {
   return <div className="bg-gray-100 p-2 ml-1  rounded mb-1">{children}</div>;
 }
-
 function Btn({ children, onClick }) {
   return (
     <button
@@ -372,22 +374,69 @@ function ResumePDF({ data }) {
   return (
     <Document>
       <Page style={{ padding: 20 }}>
-        <Text style={{ fontSize: 20, color: "black", fontWeight: "bold", marginBottom: 10 }} >{data.title}</Text>
-        <Text style={{ marginBottom: 10 }}>{data.summary}</Text>
+        <Text
+          style={{
+            fontSize: 22,
+            color: "black",
+            fontWeight: "bold",
+            marginBottom: 6,
+          }}
+        >
+          {data.title}
+        </Text>
+
+        <View
+          style={{
+            borderBottomWidth: 2,
+            borderBottomColor: "#000",
+            marginBottom: 8,
+          }}
+        />
+
+        <Text style={{ fontSize: 12, marginBottom: 10, color: "#333" }}>
+          {data.summary}
+        </Text>
+
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginBottom: 12,
+          }}
+        />
 
         <Text style={{ marginBottom: 7 }}>Phone: {data.personal.phone}</Text>
-        <Text style={{ marginBottom: 7 }}>Address: {data.personal.address}</Text>
-        <link style={{ marginBottom: 7 }}>LinkedIn: {data.personal.linkedin}</link>
-        <link style={{ marginBottom: 10 }}>GitHub: {data.personal.github}</link>
+        <Text style={{ marginBottom: 7 }}>
+          Address: {data.personal.address}
+        </Text>
+        <Text style={{ marginBottom: 5 }}>LinkedIn:</Text>
 
-        <link style={{ marginBottom: 20 }}>
-          <link
-            style={{ color: "blue", textDecoration: "underline" }}
-            src={data.personal.github}
-          >
-            GitHub
-          </link>
-        </link>
+        <Link
+          src={data.personal.linkedin}
+          style={{
+            color: "blue",
+            textDecoration: "underline",
+            marginBottom: 10,
+            fontSize: 5,
+          }}
+        >
+          {data.personal.linkedin}
+        </Link>
+
+        <Text style={{ marginBottom: 5 }}>GitHub:</Text>
+
+        <Link
+          src={data.personal.github}
+          style={{
+            color: "blue",
+            textDecoration: "underline",
+            marginBottom: 10,
+            fontSize: 5,
+          }}
+        >
+          {data.personal.github}
+        </Link>
+
         <View
           style={{
             borderBottomWidth: 1,
