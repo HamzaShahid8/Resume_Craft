@@ -151,7 +151,9 @@ export default function ResumeForm() {
         onSubmit={handleSubmit}
         className="w-full max-w-5xl bg-gray-200 text-gray-700 p-8 rounded-4xl space-y-6"
       >
-        <p className="text-gray-700 text-3xl font-bold p-2 text-center">Resume Craft</p>
+        <p className="text-gray-700 text-3xl font-bold p-2 text-center">
+          Resume Craft
+        </p>
 
         {/* TITLE */}
         <input
@@ -171,7 +173,9 @@ export default function ResumeForm() {
         />
 
         {/* PERSONAL */}
-        <p className="text-gray-700 text-xl p-3 font-extrabold">Personal Info</p>
+        <p className="text-gray-700 text-xl p-3 font-extrabold">
+          Personal Info
+        </p>
 
         <div className="grid grid-cols-2 gap-2">
           <input
@@ -203,7 +207,7 @@ export default function ResumeForm() {
             className="p-2 bg-gray-100 rounded"
           />
         </div>
-         <p className="text-gray-700 text-xl p-3 font-extrabold">Education</p>
+        <p className="text-gray-700 text-xl p-3 font-extrabold">Education</p>
         {/* EDUCATION */}
         <div className="bg-gray-100 text-gray-700 gap-1 rounded">
           {formData.education.map((edu, i) => (
@@ -299,7 +303,11 @@ export default function ResumeForm() {
                 onChange={(e) => handleListChange(e, i, "skills")}
                 className="p-2 bg-gray-100 text-gray-700 flex-1"
               />
-              <button type="button" onClick={() => removeItem("skills", i)} className="text-gray-500">
+              <button
+                type="button"
+                onClick={() => removeItem("skills", i)}
+                className="text-gray-500"
+              >
                 X
               </button>
             </div>
@@ -314,7 +322,10 @@ export default function ResumeForm() {
             fileName="resume.pdf"
           >
             {({ loading }) => (
-              <button type="button" className="bg-gray-500 text-gray-100 px-4 py-2 rounded">
+              <button
+                type="button"
+                className="bg-gray-500 text-gray-100 px-4 py-2 rounded"
+              >
                 {loading ? "Generating..." : "Download PDF"}
               </button>
             )}
@@ -322,7 +333,9 @@ export default function ResumeForm() {
         </div>
 
         {/* SUBMIT */}
-        <button className="w-30 bg-gray-500 text-gray-100 p-3 rounded">Save Resume</button>
+        <button className="w-30 bg-gray-500 text-gray-100 p-3 rounded">
+          Save Resume
+        </button>
       </form>
     </div>
   );
@@ -359,6 +372,7 @@ function ResumePDF({ data }) {
   return (
     <Document>
       <Page style={{ padding: 20 }}>
+<<<<<<< HEAD
         <Text style={{ fontSize: 20, color: "black", fontWeight: "bold", marginBottom: 10 }} >{data.title}</Text>
         <Text style={{ marginBottom: 10 }}>{data.summary}</Text>
 
@@ -366,25 +380,103 @@ function ResumePDF({ data }) {
         <Text style={{ marginBottom: 7 }}>Address: {data.personal.address}</Text>
         <Text style={{ marginBottom: 7 }}>LinkedIn: {data.personal.linkedin}</Text>
         <Text style={{ marginBottom: 10 }}>GitHub: {data.personal.github}</Text>
+=======
+        <Text style={{ fontSize: 26, color: "black", fontWeight: "bold" }}>
+          {data.title}
+        </Text>
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginVertical: 10,
+          }}
+        />
+        <Text>{data.summary}</Text>
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginVertical: 10,
+          }}
+        />
 
-        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Education:</Text>
+        <Text style={{ marginBottom: 10 }}>Phone: {data.personal.phone}</Text>
+        <Text style={{ marginBottom: 10 }}>
+          Address: {data.personal.address}
+        </Text>
+        <Text style={{ marginBottom: 10 }}>
+          <Text
+            style={{ color: "blue", textDecoration: "underline" }}
+            src={data.personal.linkedin}
+          >
+            LinkedIn
+          </Text>
+        </Text>
+>>>>>>> c7b1ed7 (update ui)
+
+        <Text style={{ marginBottom: 20 }}>
+          <Text
+            style={{ color: "blue", textDecoration: "underline" }}
+            src={data.personal.github}
+          >
+            GitHub
+          </Text>
+        </Text>
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginVertical: 10,
+          }}
+        />
+
+        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>
+          Education:
+        </Text>
         {data.education.map((e, i) => (
           <Text style={{ marginBottom: 10 }} key={i}>
             {e.institute} - {e.degree}
           </Text>
         ))}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginVertical: 10,
+          }}
+        />
 
-        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Experience:</Text>
+        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>
+          Experience:
+        </Text>
         {data.experience.map((e, i) => (
           <Text style={{ marginBottom: 10 }} key={i}>
             {e.company} - {e.role}
           </Text>
         ))}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginVertical: 10,
+          }}
+        />
 
-        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>Skills:</Text>
+        <Text style={{ color: "black", fontWeight: "bold", marginBottom: 20 }}>
+          Skills:
+        </Text>
         {data.skills.map((s, i) => (
-          <Text style={{ marginBottom: 10 }} key={i}>{s.name}</Text>
+          <Text style={{ marginBottom: 10 }} key={i}>
+            {s.name}
+          </Text>
         ))}
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#999",
+            marginVertical: 10,
+          }}
+        />
       </Page>
     </Document>
   );
