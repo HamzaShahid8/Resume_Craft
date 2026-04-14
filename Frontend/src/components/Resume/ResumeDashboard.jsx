@@ -124,7 +124,7 @@ export default function ResumeDashboard() {
                 key={r.id}
                 className="bg-white p-5 rounded-2xl text-left shadow-md hover:shadow-xl transition border border-gray-100"
               >
-                <h2 className="text-xl font-bold text-black text-left">{r.title}</h2>
+                <p className="text-xl font-bold text-gray-800 text-left">{r.title}</p>
                 <hr className="border-gray-300 my-2" />
 
                 <p className="text-gray-600 mb-2 text-left">{r.summary}</p>
