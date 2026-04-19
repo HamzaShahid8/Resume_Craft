@@ -57,7 +57,7 @@ class ResumeSerializer(serializers.ModelSerializer):
         PersonalInfo.objects.create(resume=resume, **personal_data)
         
         education = Education.objects.bulk_create([
-            Resume(resume=resume, **edu)
+            Education(resume=resume, **edu)
             for edu in education_data
         ])
         
