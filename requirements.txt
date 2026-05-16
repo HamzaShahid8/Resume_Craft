@@ -1,9 +1,0 @@
-django 
-djangorestframework 
-djangorestframework-simplejwt 
-environs
-bcrypt
-pillow
-psycopg2-binary
-django-filter
-django-cors-headers
